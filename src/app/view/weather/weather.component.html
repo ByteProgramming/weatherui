@@ -1,0 +1,51 @@
+<h1 style="text-align:center">Current Weather Condition</h1>
+<div class="weather" align="center">
+    <form [formGroup]="form" class="form-container" >
+      <table>
+        <tr>
+          <td>
+            Enter Location.
+            <input type="text" placeholder="pincode" formControlName="pincode" #box (keyup.enter)="onEnter(box.value)" (input)="suggest()"
+            class="form-control" [ngClass]="{ 'is-invalid': submitted && fc.pincode.errors }" />
+            <div *ngIf="fc.pincode.errors" class="invalid-feedback">
+                <div *ngIf="fc.pincode.errors.required">Pincode is required</div>
+            </div>
+            <div class="suggestion" *ngIf="suggestions.length">
+              <p *ngFor="let suggestion of suggestions">{{suggestion}}</p>
+            </div>
+          </td>
+          <td>
+            <div class="custom-control custom-switch">
+              <label class="checkbox-inline">
+            <input type="checkbox" class="custom-control-input" id="autoRefresh" formControlName="isRefresh" data-toggle="toggle" (change)="onRefresh()">
+            Auto Refresh</label>
+          </div></td>
+        </tr>
+      </table>    
+    </form>
+</div>
+  <hr/>
+  <div class="card" align="center">
+    <div class="card-title">
+      <i class="fas fa-sun" *ngIf="weatherIcon == 1">sunny</i>
+      <i class="fas fa-sun" *ngIf="weatherIcon == 2">rainy</i>
+
+    </div>
+    <div class="card-body">
+      <table *ngIf = "submitted">
+        <tr>
+          <td>Temperature</td>
+          <td>{{data.temperature.metric.value}}</td>
+        </tr>
+        <tr>
+          <td>key1</td>
+          <td>key1</td>
+        </tr>
+        <tr>
+          <td>key2</td>
+          <td>key2</td>
+        </tr>
+      </table>
+      
+    </div>
+  </div>
